@@ -46,7 +46,13 @@ app.get('/createusertable', (req, res) => {
 //Create Tweet Table
 app.get('/createsweettable', (req, res) => {
     let sql = 'CREATE TABLE sweettable(userid INT, title VARCHAR(50), body VARCHAR(140))';
-})
+    db.query(sql, (err, result) => {
+        if(err){
+            throw err;
+        }
+        res.send("Table has been created...")
+    });
+});
 
 app.listen(3000, () => {
     console.log("Server started at port 3000");
