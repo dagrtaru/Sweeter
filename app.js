@@ -56,7 +56,7 @@ app.get('/createsweettable', (req, res) => {
 
 //Create Follower Table
 app.get('/createfollowtable', (req, res) => {
-    let sql = 'CREATE TABLE followtable(userid INT, followerId INT REFERENCES usertable(userid))';
+    let sql = 'CREATE TABLE followtable(userid INT REFERENCES usertable(userid), followerId INT REFERENCES usertable(userid))';
     db.query(sql, (err, result) => {
         if(err){
             throw err;
