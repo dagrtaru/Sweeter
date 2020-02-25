@@ -56,12 +56,60 @@ app.get('/createsweettable', (req, res) => {
 
 //Create Follower Table
 app.get('/createfollowtable', (req, res) => {
-    let sql = 'CREATE TABLE followtable(userid INT REFERENCES usertable(userid), followerId INT REFERENCES usertable(userid))';
+    let sql = 'CREATE TABLE followtable(userid INT REFERENCES usertable(userid), followerid INT REFERENCES usertable(userid))';
     db.query(sql, (err, result) => {
         if(err){
             throw err;
         }
         res.send("Table has been created...")
+    });
+});
+
+//Insert User 1
+app.get('/createuser1', (req, res) => {
+    let sql = `INSERT INTO usertable VALUES('1', 'Richard', 'abc@xyz.com')`;
+    db.query(sql, (err, result) => {
+        if(err){
+            throw err;
+        }
+        console.log(result);
+        res.send("User Account Created...");
+    })
+});
+
+//Insert User 2
+app.get('/createuser2', (req, res) => {
+    let sql = `INSERT INTO usertable VALUES('2', 'John', 'def@xyz.com')`;
+    db.query(sql, (err, result) => {
+        if(err){
+            throw err;
+        }
+        console.log(result);
+        res.send("User Account Created...");
+    })
+});
+
+//Make User1 a follower of User2
+app.get('/createfollower', (req, res) => {
+    let sql = `INSERT INTO followtable VALUES('2', '1')`
+    db.query(sql, (err, result) => {
+        if(err){
+            throw err;
+        }
+        console.log(result);
+        res.send("User 1 is now following User 2");
+    });
+});
+
+//Make user1 no longer a follower of user2
+app.get('/unfollow', (req, res) => {
+    let sql =  `DELETE FROM followtable WHERE followerid = '1'`;
+    db.query(sql, (err, result) => {
+        if(err){
+            throw err;
+        }
+        console.log(result);
+        res.send("User 1 is no longer following User 2");
     });
 });
 
