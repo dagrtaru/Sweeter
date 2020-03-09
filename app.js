@@ -89,6 +89,18 @@ app.get('/createuser2', (req, res) => {
     })
 });
 
+//Insert User 3
+app.get('/createuser3', (req, res) => {
+    let sql = `INSERT INTO usertable VALUES('3', 'Paul', 'ghi@xyz.com')`;
+    db.query(sql, (err, result) => {
+        if(err){
+            throw err;
+        }
+        console.log(result);
+        res.send("User Account Created...");
+    })
+});
+
 //Make User1 a follower of User2
 app.get('/createfollower', (req, res) => {
     let sql = `INSERT INTO followtable VALUES('2', '1')`
