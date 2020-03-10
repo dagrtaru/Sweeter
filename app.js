@@ -103,13 +103,28 @@ app.get('/createuser3', (req, res) => {
 
 //Make User1 a follower of User2
 app.get('/createfollower', (req, res) => {
-    let sql = `INSERT INTO followtable VALUES('2', '1')`
+    let sql = `INSERT INTO followtable VALUES('2', '1')`;
     db.query(sql, (err, result) => {
         if(err){
             throw err;
         }
         console.log(result);
         res.send("User 1 is now following User 2");
+    });
+});
+
+//Make User3 a follower of User1 and User2
+app.get('/createfollower3', (req, res) => {
+    let sql1 = `INSERT INTO followtable VALUES('1', '3')`;
+    let sql2 = `INSERT INTO followtable VALUES('2', '3')`;
+    db.query(sql1, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+    });
+    db.query(sql2, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+        res.send("User3 is now following User1 and User2");
     });
 });
 
