@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('mysql');
+const exphbs = require('express-handlebars');
 
 //create connection
 const db = mysql.createConnection({
@@ -18,6 +19,8 @@ db.connect((err) => {
 });
 
 const app = express();
+app.engine('handlebars', exphbs());
+app.set('view engine', 'handlebars');
 
 //Create DB
 app.get('/createdb', (req, res) => {
