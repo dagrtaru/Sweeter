@@ -22,6 +22,11 @@ const app = express();
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
+//home
+app.get('/', (req, res, next) => {
+    res.render('login', {layout : false});
+});
+
 //Create DB
 app.get('/createdb', (req, res) => {
     let sql = 'CREATE DATABASE sweeter';
